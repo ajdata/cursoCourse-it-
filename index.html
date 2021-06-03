@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Usuarios de Github</title>
+</head>
+<h1>Buscador de Perfiles Github</h1>
+<p style="background:rgb(12, 12, 12);"> .</p>
+<body>
+    
+    <input type="text" id="user" />
+    <button onclick= "fetchData()" >Buscar</button>
+    <div> 
+        <label>Nombre:</label><span id= "name"></span><br />
+        <label>Empresa:</label><span id= "company"></span><br />
+        <label>Bio:</label><span id="bio"></span>
+    </div>
+    <script>
+        async function fetchData() {
+            const inputValue = document.getElementById("user").value;
+            const data = await fetch(`https://api.github.com/users/${inputValue}`);
+            const json = await data.json();
+            document.getElementById('name').innerText = json.name;
+            document.getElementById('company').innerText = json.company; 
+            document.getElementById('bio').innerText = json.bio;
+            console.log(json) 
+        }
+
+        fetchData();
+        </script>
+    </body>
+</html> 
